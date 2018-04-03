@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="?android:attr/colorPrimary"
-            app:titleTextColor="@android:color/white"
+            app:titleMarginStart="@dimen/margin_large"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             />
 
     </android.support.design.widget.AppBarLayout>

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.shtain.irina.weatherapp.R;
+import com.shtain.irina.weatherapp.utils.Constants;
 import com.shtain.irina.weatherapp.view.base.BaseActivity;
 import com.shtain.irina.weatherapp.view.screens.home.HomeActivity;
 
@@ -61,11 +62,11 @@ public class SplashActivity extends BaseActivity implements SplashContract.Splas
         ValueAnimator scaleX = ObjectAnimator.ofFloat(ivLogo, View.SCALE_X, 0.8f, 1.2f, 1f, 1.1f);
         ValueAnimator scaleY = ObjectAnimator.ofFloat(ivLogo, View.SCALE_Y, 0.8f, 1.2f, 1f, 1.1f);
 
-        animatorSet.setDuration(800);
+        animatorSet.setDuration(1500);
         animatorSet.play(fadeLogo)
                 .with(scaleX)
                 .with(scaleY)
-                .before(ValueAnimator.ofInt(0, 0).setDuration(1500));
+                .before(ValueAnimator.ofInt(0, 0).setDuration(800));
         animatorSet.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -80,7 +81,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.Splas
 
     @Override
     public void startHomeScreen() {
-        Toast.makeText(this, "startHomeScreen", Toast.LENGTH_LONG).show();
         Intent intent =new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

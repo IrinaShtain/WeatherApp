@@ -3,18 +3,27 @@ package com.shtain.irina.weatherapp.view.screens.home.details;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.shtain.irina.weatherapp.R;
 import com.shtain.irina.weatherapp.model.City;
+import com.shtain.irina.weatherapp.utils.Constants;
 import com.shtain.irina.weatherapp.view.base.BaseFragment;
 import com.shtain.irina.weatherapp.view.base.BasePresenter;
+import com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent;
 import com.shtain.irina.weatherapp.view.screens.home.HomeActivity;
-import com.shtain.irina.weatherapp.view.screens.home.cities.CityListPresenter;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 /**
  * Created by Irina Shtain on 03.04.2018.
@@ -23,8 +32,23 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
     public static final String CITY = "city";
     @Inject
     DetailsPresenter mPresenter;
+    @BindView(R.id.tvCityAddress_DF)
+    TextView tvCityAddress_DF;
+    @BindView(R.id.pbMain_DF)
+    ProgressBar pbMain_DF;
+    @BindView(R.id.rlContent_DF)
+    RelativeLayout rlContent_DF;
+    @BindView(R.id.mainComponent_DF)
+    CustomWeatherComponent mainComponent_DF;
+    @BindView(R.id.rlPlaceHolder)
+    protected RelativeLayout rlPlaceHolder;
+    @BindView(R.id.ivPlaceholderImage)
+    protected ImageView ivPlaceholderImage;
+    @BindView(R.id.tvPlaceholderMessage)
+    protected TextView tvPlaceholderMessage;
 
     private City mCity;
+    private Snackbar snackbar;
 
     public static DetailsFragment newInstance(City city) {
         Bundle args = new Bundle();
@@ -37,10 +61,19 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View parent = inflater.inflate(R.layout.fragment_cities, container, false);
+        View parent = inflater.inflate(R.layout.fragment_weather_details, container, false);
         bindView(this, parent);
-        ((HomeActivity) mActivity).mToolbar.setTitle("Cities Details");
+        setupToolbar(true);
         return parent;
+    }
+
+    private void setupToolbar(boolean need) {
+        ((HomeActivity) mActivity).mToolbar.setTitle(R.string.title_weather_details);
+        ActionBar actionBar = mActivity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(need);
+            actionBar.setHomeButtonEnabled(need);
+        }
     }
 
     @Override
@@ -48,8 +81,16 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
         super.onViewCreated(view, savedInstanceState);
         assert getArguments() != null;
         mCity = getArguments().getParcelable(CITY);
+        initSnackbar();
+        tvCityAddress_DF.setText(mCity.getAddress());
         mPresenter.setView(this);
         mPresenter.subscribe();
+    }
+
+    private void initSnackbar() {
+        snackbar = Snackbar.make(rlContent_DF, "", Snackbar.LENGTH_SHORT);
+        TextView textView = snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        textView.setMaxLines(5);  // show multiple line
     }
 
     @Override
@@ -65,5 +106,51 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
     @Override
     public City getChosenCity() {
         return mCity;
+    }
+
+    @Override
+    public void showProgress() {
+        pbMain_DF.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        pbMain_DF.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setIcon(String icon) {
+        mainComponent_DF.setIcon(icon);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        mainComponent_DF.setDesc(description);
+    }
+
+    @Override
+    public void setTemperature(float temp) {
+        mainComponent_DF.setTemp(getString(R.string.title_temp, String.valueOf(temp)));
+    }
+
+    @Override
+    public void setHumidity(String humidity) {
+        mainComponent_DF.setHumidity(getString(R.string.title_humidity, humidity));
+    }
+
+    @Override
+    public void setDate(String date) {
+        mainComponent_DF.setDate(date);
+    }
+
+    @Override
+    public void showMessage(Constants.MessageType messageType) {
+        showMessage(snackbar, getString(messageType.getMessageRes()), messageType.isDangerous());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        setupToolbar(false);
     }
 }

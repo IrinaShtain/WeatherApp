@@ -3,10 +3,14 @@ package com.shtain.irina.weatherapp.view.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+
+import com.shtain.irina.weatherapp.R;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -14,7 +18,7 @@ import butterknife.Unbinder;
 /**
  * Created by Irina Shtain on 02.04.2018.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BaseView{
 
     protected BaseActivity mActivity;
     protected Unbinder mUnbinder;
@@ -64,6 +68,15 @@ public abstract class BaseFragment extends Fragment {
                 setEnabled((ViewGroup) view, enabled);
             }
         }
+    }
+
+    protected void showMessage(Snackbar snackbar, String message, boolean isError) {
+        if (snackbar.isShown()) snackbar.dismiss();
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), isError
+                ? R.color.colorRed
+                : R.color.colorPrimary));
+        snackbar.setText(message);
+        snackbar.show();
     }
 
     @Override

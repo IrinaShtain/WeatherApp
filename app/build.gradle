@@ -10,7 +10,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_KEY", '"4e24b48366bd60da4d55a6271ed9e8bf"'
+        buildConfigField "String", "API_KEY", '"486b1d5f6d307570ff737b05e236d113"'
         buildConfigField "String", "UNITS", '"metric"'
     }
     buildTypes {

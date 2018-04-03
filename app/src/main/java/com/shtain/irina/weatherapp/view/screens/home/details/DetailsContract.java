@@ -1,27 +1,33 @@
 package com.shtain.irina.weatherapp.view.screens.home.details;
 
-import com.google.android.gms.location.places.Place;
 import com.shtain.irina.weatherapp.model.City;
 import com.shtain.irina.weatherapp.model.WeatherResponse;
-import com.shtain.irina.weatherapp.utils.Constants;
 import com.shtain.irina.weatherapp.view.base.BasePresenter;
-import com.shtain.irina.weatherapp.view.base.BaseView;
-import com.shtain.irina.weatherapp.view.screens.home.cities.CityListContract;
-import com.shtain.irina.weatherapp.view.screens.home.cities.DBListener;
-import com.shtain.irina.weatherapp.view.screens.home.cities.adapter.CityDH;
-
-import java.util.ArrayList;
+import com.shtain.irina.weatherapp.view.base.ContentView;
 
 import io.reactivex.Observable;
-import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Created by Irina Shtain on 03.04.2018.
  */
 public interface DetailsContract {
-    interface View extends BaseView {
+    interface View extends ContentView {
         City getChosenCity();
+
+        void showProgress();
+
+        void hideProgress();
+
+        void setIcon(String icon);
+
+        void setDescription(String description);
+
+        void setTemperature(float temp);
+
+        void setHumidity(String humidity);
+
+        void setDate(String date);
+
     }
 
     interface Presenter extends BasePresenter<DetailsContract.View> {

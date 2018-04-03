@@ -34,12 +34,12 @@ public class CitiesRepository implements CityListContract.Model {
     public void addCityToDB(City city, DBListener listener) {
         transaction = mRealm.executeTransactionAsync(bgRealm -> {
                     CityDB realmObject = bgRealm.createObject(CityDB.class, city.getAddress()); // Create a new object
-                    realmObject.setLongitude(realmObject.getLongitude());
-                    realmObject.setLatitude(realmObject.getLatitude());
+                    realmObject.setLongitude(city.getLongitude());
+                    realmObject.setLatitude(city.getLatitude());
                 },
                 listener::onSuccess,
                 error -> {
-                    Log.d("myLog", " " + error.getMessage());
+                    Log.e("myLog", " " + error.getMessage());
                     listener.onError(error);
                 });
     }

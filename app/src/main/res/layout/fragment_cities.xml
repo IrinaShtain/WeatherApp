@@ -14,39 +14,7 @@
         android:layout_marginTop="@dimen/margin_half"
         />
 
-    <RelativeLayout
-        android:id="@+id/rlPlaceHolder_FH"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        tools:visibility="visible">
-        <ImageView
-            android:id="@+id/ivPlaceholderImage_FH"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_half"
-            android:minHeight="@dimen/avatar_large"
-            android:minWidth="@dimen/avatar_large"
-            android:src="@drawable/ic_no_data"/>
-
-        <TextView
-            android:id="@+id/tvPlaceholderMessage_FH"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_below="@id/ivPlaceholderImage_FH"
-            android:layout_margin="@dimen/margin_half"
-            android:gravity="center"
-            android:text="@string/no_added_cities"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_size_large"/>
-
-
-    </RelativeLayout>
+   <include layout="@layout/view_placeholder"/>
 
 
     <android.support.design.widget.FloatingActionButton

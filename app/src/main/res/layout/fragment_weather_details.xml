@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlContent_DF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvCityAddress_DF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_default"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_big"
+        tools:text="@string/app_name"
+        android:textStyle="bold"/>
+
+    <ProgressBar
+        android:id="@+id/pbMain_DF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
+    <include
+        layout="@layout/view_placeholder"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent
+        android:id="@+id/mainComponent_DF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCityAddress_DF">
+
+    </com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent>
+
+
+</RelativeLayout>

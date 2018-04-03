@@ -11,9 +11,14 @@
     <string name="err_msg_failed_connection">Failed to connect…</string>
     <string name="err_msg_suspended_connection">Connection suspended…</string>
     <string name="err_msg_no_known_location">Can\'t determine the location</string>
+    <string name="no_added_cities">No Added Cities…Please click plus to add city</string>
     /*Error messages*/
     <string name="msg_city_added">City successfully added</string>
     /*Button address*/
     <string name="button_retry">Retry</string>
-    <string name="no_added_cities">No Added Cities…Please click plus to add city</string>
+
+    <string name="title_temp">Temperature: %s</string>
+    <string name="title_humidity">Humidity: %s</string>
+    <string name="title_weather_details">Weather Details</string>
+    <string name="title_cities">Cities</string>
 </resources>

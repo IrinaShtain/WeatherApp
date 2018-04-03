@@ -38,7 +38,6 @@ public class RetrofitHelper {
                 .writeTimeout(Constants.TIMEOUT_WRITE, TimeUnit.SECONDS)
                 .addInterceptor(chain -> {
                     try {
-                        Log.e("myLog", "chain called " + chain.request().url());
                         if (!mNetworkManager.isConnected()) {
                             throw new ConnectionException();
                         } else {
@@ -48,6 +47,7 @@ public class RetrofitHelper {
                                     .addQueryParameter("units", BuildConfig.UNITS)
                                     .build();
                             request = request.newBuilder().url(url).build();
+                            Log.e("myLog", "chain called " + chain.request().url());
                             return chain.proceed(request);
                         }
                     } catch (SocketTimeoutException e) {

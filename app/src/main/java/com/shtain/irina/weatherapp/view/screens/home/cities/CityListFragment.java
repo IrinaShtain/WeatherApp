@@ -66,8 +66,8 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
     protected RecyclerView rvItems_FH;
     @BindView(R.id.content_FH)
     protected CoordinatorLayout content_FH;
-    @BindView(R.id.rlPlaceHolder_FH)
-    protected RelativeLayout rlPlaceHolder_FH;
+    @BindView(R.id.rlPlaceHolder)
+    protected RelativeLayout rlPlaceHolder;
     @Inject
     CityListPresenter mPresenter;
 
@@ -81,7 +81,9 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
         View parent = inflater.inflate(R.layout.fragment_cities, container, false);
         bindView(this, parent);
         initGoogleClient();
-        ((HomeActivity) mActivity).mToolbar.setTitle("Cities");
+        ((HomeActivity) mActivity).mToolbar.setTitle(R.string.title_cities);
+        ((HomeActivity) mActivity).mToolbar.setLogo(R.drawable.ic_cloud);
+
         return parent;
     }
 
@@ -186,7 +188,7 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         } else
-            showMessage(getString(R.string.err_msg_not_connected), true);
+            showMessage(snackbar, getString(R.string.err_msg_not_connected), true);
     }
 
     @Override
@@ -196,7 +198,7 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
 
     @Override
     public void showCities(ArrayList<CityDH> cityDHs) {
-        rlPlaceHolder_FH.setVisibility(View.GONE);
+        rlPlaceHolder.setVisibility(View.GONE);
         mAdapter.addCities(cityDHs);
     }
 
@@ -214,27 +216,18 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
     @Override
     public void addCity(CityDH cityDH, int position) {
         mAdapter.addCity(cityDH, position);
-        if (rlPlaceHolder_FH.getVisibility() == View.VISIBLE)
-            rlPlaceHolder_FH.setVisibility(View.GONE);
+        if (rlPlaceHolder.getVisibility() == View.VISIBLE)
+            rlPlaceHolder.setVisibility(View.GONE);
     }
 
     @Override
     public void showMessage(Constants.MessageType messageType) {
-        showMessage(getString(messageType.getMessageRes()), messageType.isDangerous());
-    }
-
-    private void showMessage(String message, boolean isError) {
-        if (snackbar.isShown()) snackbar.dismiss();
-        snackbar.getView().setBackgroundColor(ContextCompat.getColor(getActivity(), isError
-                ? R.color.colorRed
-                : R.color.colorPrimary));
-        snackbar.setText(message);
-        snackbar.show();
+        showMessage(snackbar, getString(messageType.getMessageRes()), messageType.isDangerous());
     }
 
     @Override
     public void showPlaceHolder() {
-        rlPlaceHolder_FH.setVisibility(View.VISIBLE);
+        rlPlaceHolder.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.fabAdd_FH)
@@ -248,7 +241,7 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
                             .build(getActivity());
             this.startActivityForResult(intent, Constants.REQUEST_PLACE_AUTOCOMPLETE_CODE);
         } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-            showMessage(getString(R.string.err_msg_no_known_location), true);
+            showMessage(snackbar, getString(R.string.err_msg_no_known_location), true);
         }
     }
 
@@ -272,13 +265,13 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
 
     @Override
     public void onConnectionSuspended(int i) {
-        showMessage(getString(R.string.err_msg_suspended_connection), true);
+        showMessage(snackbar, getString(R.string.err_msg_suspended_connection), true);
     }
 
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        showMessage(getString(R.string.err_msg_failed_connection), true);
+        showMessage(snackbar, getString(R.string.err_msg_failed_connection), true);
     }
 
     @Override

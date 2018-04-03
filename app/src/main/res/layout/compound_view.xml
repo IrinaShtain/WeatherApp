@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivIcon"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_half"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        tools:text="Description"
+        />
+
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/avatar_large"
+        android:layout_height="@dimen/avatar_large"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_half"
+        tools:src="@drawable/ic_cloud_off"/>
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivIcon"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_half"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        tools:text="Description"
+        />
+
+    <TextView
+        android:id="@+id/tvTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDesc"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_half"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_default"
+        android:textStyle="bold"
+        tools:text="Temperature"
+        />
+
+    <TextView
+        android:id="@+id/tvHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDesc"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_half"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_default"
+        android:textStyle="bold"
+        tools:text="Temperature"
+        />
+
+</merge>
