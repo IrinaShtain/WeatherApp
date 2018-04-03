@@ -1,0 +1,27 @@
+package com.shtain.irina.weatherapp.view.screens.home.cities.adapter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.shtain.irina.weatherapp.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Irina Shtain on 03.04.2018.
+ */
+public class CityVH extends RecyclerView.ViewHolder {
+    @BindView(R.id.tvCityAddress)
+    protected TextView tvCityAddress;
+
+    public CityVH(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this, itemView);
+    }
+
+    public void bindData(CityDH cityDH) {
+        tvCityAddress.setText(cityDH.getCityTitle());
+    }
+}

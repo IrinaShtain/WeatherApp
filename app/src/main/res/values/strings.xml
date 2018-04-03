@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="google_maps_key">AIzaSyBAvnAU4ufd_WJXeQUBE1DKQ-lFTTo-plY</string>
+    /*Error messages*/
+    <string name="err_msg_no_data">No data</string>
+    <string name="err_msg_connection_problem">Connection lost</string>
+    <string name="err_msg_city_already_exists">City already exists in list</string>
+    <string name="err_msg_city_removed">City successfully removed</string>
+    <string name="err_msg_something_goes_wrong">Something went wrong</string>
+    <string name="err_msg_not_connected">Not connected…</string>
+    <string name="err_msg_failed_connection">Failed to connect…</string>
+    <string name="err_msg_suspended_connection">Connection suspended…</string>
+    <string name="err_msg_no_known_location">Can\'t determine the location</string>
+    /*Error messages*/
+    <string name="msg_city_added">City successfully added</string>
+    /*Button address*/
+    <string name="button_retry">Retry</string>
+    <string name="no_added_cities">No Added Cities…Please click plus to add city</string>
+</resources>
