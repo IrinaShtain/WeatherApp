@@ -46,14 +46,15 @@ public class CitiesRepository implements CityListContract.Model {
 
     @Override
     public void deleteCity(City city, DBListener listener) {
-        final RealmResults<CityDB> results = mRealm.where(CityDB.class).equalTo("address", city.getAddress()).findAll();
-        transaction = mRealm.executeTransactionAsync(bgRealm -> results.deleteFirstFromRealm(),
-                listener::onSuccess,
-                error -> {
-                    Log.d("myLog", " " + error.getMessage());
-                    listener.onError(error);
-                });
-
+        try {
+            mRealm.executeTransaction(realm -> {
+                RealmResults<CityDB> results = realm.where(CityDB.class).equalTo("address", city.getAddress()).findAll();
+                results.deleteFirstFromRealm();
+            });
+            listener.onSuccess();
+        } catch (Throwable error) {
+            listener.onError(error);
+        }
     }
 
     @Override

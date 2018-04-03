@@ -49,10 +49,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else
             finish();
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mRealm.close();
-    }
 }
