@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_half"
+        android:layout_marginBottom="@dimen/margin_default"
         android:minHeight="@dimen/avatar_large"
         android:minWidth="@dimen/avatar_large"
         android:src="@drawable/ic_no_data"/>
@@ -26,9 +26,9 @@
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:layout_below="@id/ivPlaceholderImage"
-        android:layout_margin="@dimen/margin_half"
+        android:layout_margin="@dimen/margin_default"
         android:gravity="center"
-        android:text="@string/no_added_cities"
+        android:text="@string/err_msg_no_added_cities"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/text_size_large"/>
 

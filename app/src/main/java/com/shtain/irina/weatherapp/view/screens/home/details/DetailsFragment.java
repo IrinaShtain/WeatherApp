@@ -21,6 +21,8 @@ import com.shtain.irina.weatherapp.view.base.BasePresenter;
 import com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent;
 import com.shtain.irina.weatherapp.view.screens.home.HomeActivity;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -46,6 +48,8 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
     protected ImageView ivPlaceholderImage;
     @BindView(R.id.tvPlaceholderMessage)
     protected TextView tvPlaceholderMessage;
+    @BindView(R.id.tvOfflineMode_DF)
+    protected TextView tvOfflineMode_DF;
 
     private City mCity;
     private Snackbar snackbar;
@@ -119,6 +123,11 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
     }
 
     @Override
+    public void showOfflineMode() {
+        tvOfflineMode_DF.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void setIcon(String icon) {
         mainComponent_DF.setIcon(icon);
     }
@@ -130,12 +139,14 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
 
     @Override
     public void setTemperature(float temp) {
-        mainComponent_DF.setTemp(getString(R.string.title_temp, String.valueOf(temp)));
+        mainComponent_DF.setTemp(String.format(Locale.getDefault(), "%s %d%s",
+                getString(R.string.title_temp), (int) temp, "°C"));
     }
 
     @Override
     public void setHumidity(String humidity) {
-        mainComponent_DF.setHumidity(getString(R.string.title_humidity, humidity));
+        mainComponent_DF.setHumidity(String.format(Locale.getDefault(), "%s %s%s",
+                getString(R.string.title_humidity), humidity, "%"));
     }
 
     @Override
@@ -146,6 +157,13 @@ public class DetailsFragment extends BaseFragment implements DetailsContract.Vie
     @Override
     public void showMessage(Constants.MessageType messageType) {
         showMessage(snackbar, getString(messageType.getMessageRes()), messageType.isDangerous());
+    }
+
+    @Override
+    public void showPlaceholder(Constants.PlaceholderType placeholderType) {
+        rlPlaceHolder.setVisibility(View.VISIBLE);
+        ivPlaceholderImage.setImageResource(placeholderType.getIconRes());
+        tvPlaceholderMessage.setText(placeholderType.getMessageRes());
     }
 
     @Override

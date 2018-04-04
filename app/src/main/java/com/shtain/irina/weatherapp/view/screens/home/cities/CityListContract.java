@@ -37,7 +37,7 @@ public interface CityListContract {
     }
 
     interface Model {
-        RealmResults<CityDB> cities(Realm realm);
+        RealmResults<CityDB> cities();
 
         void addCityToDB(City city, DBListener listener);
 

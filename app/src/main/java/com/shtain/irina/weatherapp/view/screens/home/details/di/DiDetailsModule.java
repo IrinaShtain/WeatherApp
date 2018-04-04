@@ -10,6 +10,7 @@ import com.shtain.irina.weatherapp.view.screens.home.di.MainScope;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 
 /**
  * Created by Irina Shtain on 03.04.2018.
@@ -24,8 +25,8 @@ public class DiDetailsModule {
 
     @Provides
     @MainScope
-    DetailsContract.Model provideDataRepository(RetrofitHelper helper, SchedulerHelper schedulerHelper) {
-        return new WeatherRepository(provideWeatherService(helper), schedulerHelper);
+    DetailsContract.Model provideDataRepository(RetrofitHelper helper, SchedulerHelper schedulerHelper, Realm realm) {
+        return new WeatherRepository(provideWeatherService(helper), schedulerHelper, realm);
     }
 
     @Provides

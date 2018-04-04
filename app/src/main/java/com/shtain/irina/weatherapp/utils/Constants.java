@@ -27,6 +27,7 @@ public abstract class Constants {
         CITY_ALREADY_EXIST(R.string.err_msg_city_already_exists, true),
         CITY_REMOVED(R.string.err_msg_city_removed, true),
         CITY_ADDED(R.string.msg_city_added, false),
+        WEATHER_IS_NOT_SAVED(R.string.err_msg_weather_are_not_saved, true),
         UNKNOWN(R.string.err_msg_something_goes_wrong, true);
 
         @StringRes
@@ -50,6 +51,7 @@ public abstract class Constants {
     public enum PlaceholderType {
         NETWORK(R.string.err_msg_connection_problem, R.drawable.ic_cloud_off),
         UNKNOWN(R.string.err_msg_something_goes_wrong, R.drawable.ic_sentiment_dissatisfied),
+        NO_SAVED_DATA(R.string.err_msg_no_saved_data, R.drawable.ic_sentiment_dissatisfied),
         EMPTY(R.string.err_msg_no_data, R.drawable.ic_no_data);
 
         @StringRes

@@ -23,14 +23,13 @@ public class CityListPresenter implements CityListContract.Presenter {
     private Realm mRealm;
 
     @Inject
-    public CityListPresenter(CityListContract.Model model, Realm realm) {
+    public CityListPresenter(CityListContract.Model model) {
         mModel = model;
-        mRealm = realm;
     }
 
     @Override
     public void subscribe() {
-        RealmResults<CityDB> cities = mModel.cities(mRealm);
+        RealmResults<CityDB> cities = mModel.cities();
         ArrayList<CityDH> cityDHS = new ArrayList<>();
         for (CityDB city : cities) {
             cityDHS.add(new CityDH(new City(city.getAddress(),

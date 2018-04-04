@@ -10,10 +10,6 @@ public class Temperature {
     private float temp;
     @SerializedName("humidity")
     private int humidity;
-    @SerializedName("temp_min")
-    private float tempMin;
-    @SerializedName("temp_max")
-    private float tempMax;
 
     public float getTemp() {
         return temp;
@@ -21,13 +17,5 @@ public class Temperature {
 
     public int getHumidity() {
         return humidity;
-    }
-
-    public float getTempMin() {
-        return tempMin;
-    }
-
-    public float getTempMax() {
-        return tempMax;
     }
 }

@@ -17,14 +17,14 @@ import io.realm.Realm;
 public class DiCitiesModule {
     @Provides
     @MainScope
-    CityListContract.Presenter provideCityPresenter(CityListContract.Model model, Realm realm) {
-        return new CityListPresenter(model, realm);
+    CityListContract.Presenter provideCityPresenter(CityListContract.Model model) {
+        return new CityListPresenter(model);
     }
 
     @Provides
     @MainScope
-    CityListContract.Model provideCityData() {
-        return new CitiesRepository();
+    CityListContract.Model provideCityData(Realm realm) {
+        return new CitiesRepository(realm);
     }
 
 }

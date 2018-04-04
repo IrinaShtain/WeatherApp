@@ -31,6 +31,6 @@
     <dimen name="text_size_title">24sp</dimen>
 
     <!--Images-->
-    <dimen name="avatar_large">150dp</dimen>
+    <dimen name="avatar_large">100dp</dimen>
     <dimen name="avatar_small">40dp</dimen>
 </resources>

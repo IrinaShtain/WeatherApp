@@ -10,10 +10,6 @@ public class WeatherResponse {
     public Weather[] weather;
     @SerializedName("main")
     public Temperature temperature;
-    @SerializedName("wind")
-    public Wind wind;
     @SerializedName("dt")
     public long timeStamp;
-    @SerializedName("sys")
-    public SunInfo sun;
 }

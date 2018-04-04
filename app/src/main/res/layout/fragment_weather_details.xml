@@ -10,12 +10,30 @@
         android:id="@+id/tvCityAddress_DF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default"
+        android:layout_marginBottom="@dimen/margin_quart"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/text_size_big"
-        tools:text="@string/app_name"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        tools:text="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/tvOfflineMode_DF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCityAddress_DF"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:layout_marginStart="@dimen/margin_default"
+        android:gravity="center_horizontal"
+        android:text="@string/title_offline_mode"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold"
+        android:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/pbMain_DF"
@@ -28,15 +46,16 @@
 
     <include
         layout="@layout/view_placeholder"
-        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_centerInParent="true"/>
 
     <com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent
         android:id="@+id/mainComponent_DF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvCityAddress_DF">
+        android:layout_below="@id/tvCityAddress_DF"
+        android:layout_marginTop="@dimen/margin_default">
 
     </com.shtain.irina.weatherapp.view.custom.CustomWeatherComponent>
 

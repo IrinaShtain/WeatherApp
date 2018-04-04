@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -90,9 +91,9 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initSnackbar();
         setupRecyclerView();
         setupSwipeToRemove();
-        initSnackbar();
         mPresenter.setView(this);
         mPresenter.subscribe();
     }
@@ -107,12 +108,6 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
 
     private void setupSwipeToRemove() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-
-            @Override
-            public boolean isItemViewSwipeEnabled() {
-                return rvItems_FH.isFocused();
-            }
-
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -129,17 +124,21 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
                 Bitmap icon = getVectorBitmap(R.drawable.ic_delete_white);
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     View itemView = viewHolder.itemView;
-                    float height = (float) itemView.getBottom() - (float) itemView.getTop();
-                    float width = height / 3;
-
+                    float iconSize = getResources().getDisplayMetrics().density * 32;
+                    float margin = getResources().getDisplayMetrics().density * 24;
+                    float yCenter = itemView.getTop() + itemView.getHeight() / 2;
+                    float paddingBottomPx = 8 * getResources().getDisplayMetrics().density;
                     Paint p = new Paint();
 
                     if (dX < 0) {
                         p.setColor(Color.parseColor("#f44336"));
-                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom());
+                        RectF background = new RectF((float) itemView.getRight() + dX, (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom() - (8 * getResources().getDisplayMetrics().density));
                         c.drawRect(background, p);
                         c.clipRect(background);
-                        RectF icon_dest = new RectF((float) itemView.getRight() - 2 * width, (float) itemView.getTop() + width, (float) itemView.getRight() - width, (float) itemView.getBottom() - width);
+                        RectF icon_dest = new RectF(itemView.getRight() - margin - iconSize,
+                                (yCenter - iconSize / 2) - paddingBottomPx / 2,
+                                itemView.getRight() - margin,
+                                (yCenter + iconSize / 2) - paddingBottomPx / 2);
                         c.drawBitmap(icon, null, icon_dest, p);
                     }
                 }
@@ -288,4 +287,9 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ((HomeActivity) mActivity).mToolbar.setLogo(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+    }
 }

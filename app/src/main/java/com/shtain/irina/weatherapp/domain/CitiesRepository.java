@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.shtain.irina.weatherapp.model.City;
 import com.shtain.irina.weatherapp.model.dbmodels.CityDB;
+import com.shtain.irina.weatherapp.model.dbmodels.MainWeatherDB;
+import com.shtain.irina.weatherapp.model.dbmodels.TemperatureDB;
+import com.shtain.irina.weatherapp.model.dbmodels.WeatherDB;
 import com.shtain.irina.weatherapp.view.screens.home.cities.CityListContract;
 import com.shtain.irina.weatherapp.view.screens.home.cities.DBListener;
 
@@ -21,12 +24,12 @@ public class CitiesRepository implements CityListContract.Model {
     private RealmAsyncTask transaction;
 
     @Inject
-    public CitiesRepository() {
+    public CitiesRepository(Realm realm) {
+        mRealm = realm;
     }
 
     @Override
-    public RealmResults<CityDB> cities(Realm realm) {
-        mRealm = realm;
+    public RealmResults<CityDB> cities() {
         return this.mRealm.where(CityDB.class).findAll();
     }
 
@@ -50,6 +53,22 @@ public class CitiesRepository implements CityListContract.Model {
             mRealm.executeTransaction(realm -> {
                 RealmResults<CityDB> results = realm.where(CityDB.class).equalTo("address", city.getAddress()).findAll();
                 results.deleteFirstFromRealm();
+
+                MainWeatherDB realmObject;
+                realmObject = mRealm.where(MainWeatherDB.class).equalTo("city.address", city.getAddress()).findFirst();
+                if (realmObject != null)
+                    realmObject.deleteFromRealm();
+
+                WeatherDB weatherDB;
+                weatherDB = mRealm.where(WeatherDB.class).equalTo("city.address", city.getAddress()).findFirst();
+                if (weatherDB != null)
+                    weatherDB.deleteFromRealm();
+
+                TemperatureDB temperatureDB;
+                temperatureDB = mRealm.where(TemperatureDB.class).equalTo("city.address", city.getAddress()).findFirst();
+                if (temperatureDB != null)
+                    temperatureDB.deleteFromRealm();
+
             });
             listener.onSuccess();
         } catch (Throwable error) {
