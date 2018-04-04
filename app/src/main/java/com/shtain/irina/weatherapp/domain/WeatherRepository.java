@@ -30,10 +30,9 @@ public class WeatherRepository implements DetailsContract.Model {
     private RealmAsyncTask transaction;
 
     @Inject
-    public WeatherRepository(WeatherService service, SchedulerHelper schedulerHelper, Realm realm) {
+    public WeatherRepository(WeatherService service, SchedulerHelper schedulerHelper) {
         mService = service;
         mSchedulerHelper = schedulerHelper;
-        mRealm = realm;
     }
 
     @Override
@@ -43,6 +42,7 @@ public class WeatherRepository implements DetailsContract.Model {
 
     @Override
     public void saveData(WeatherResponse data, City city, DBListener listener) {
+        mRealm = Realm.getDefaultInstance();
         transaction = mRealm.executeTransactionAsync(bgRealm -> {
                     CityDB cityDB = bgRealm.where(CityDB.class)
                             .equalTo("address", city.getAddress())
@@ -89,5 +89,15 @@ public class WeatherRepository implements DetailsContract.Model {
         if (transaction != null && !transaction.isCancelled()) {
             transaction.cancel();
         }
+    }
+
+    @Override
+    public void createRealmInstance() {
+        mRealm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    public void closeRealmInstance() {
+        mRealm.close();
     }
 }

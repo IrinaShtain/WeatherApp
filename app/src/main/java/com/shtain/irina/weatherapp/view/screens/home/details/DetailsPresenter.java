@@ -29,14 +29,15 @@ public class DetailsPresenter implements DetailsContract.Presenter {
     private CompositeDisposable mCompositeDisposable;
 
     @Inject
-    public DetailsPresenter(DetailsContract.Model model) {
+    public DetailsPresenter(DetailsContract.Model model, CompositeDisposable compositeDisposable) {
         mModel = model;
-        mCompositeDisposable = new CompositeDisposable();
+        mCompositeDisposable = compositeDisposable;
     }
 
     @Override
     public void subscribe() {
         mCity = mView.getChosenCity();
+        mModel.createRealmInstance();
         Log.e("myLog", mCity.getAddress());
         Log.e("myLog", " getLatitude" + mCity.getLatitude());
         Log.e("myLog", "getLongitude" + mCity.getLongitude());
@@ -102,6 +103,7 @@ public class DetailsPresenter implements DetailsContract.Presenter {
     public void unsubscribe() {
         mCompositeDisposable.clear();
         mModel.cancelTransactions();
+        mModel.closeRealmInstance();
     }
 
     @Override

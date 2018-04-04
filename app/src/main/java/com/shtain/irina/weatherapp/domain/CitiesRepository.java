@@ -24,8 +24,7 @@ public class CitiesRepository implements CityListContract.Model {
     private RealmAsyncTask transaction;
 
     @Inject
-    public CitiesRepository(Realm realm) {
-        mRealm = realm;
+    public CitiesRepository() {
     }
 
     @Override
@@ -81,5 +80,16 @@ public class CitiesRepository implements CityListContract.Model {
         if (transaction != null && !transaction.isCancelled()) {
             transaction.cancel();
         }
+
+    }
+
+    @Override
+    public void createRealmInstance() {
+        mRealm = Realm.getDefaultInstance();
+    }
+
+    @Override
+    public void closeRealmInstance() {
+        mRealm.close();
     }
 }

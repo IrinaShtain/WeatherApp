@@ -44,5 +44,9 @@ public interface CityListContract {
         void deleteCity(City city, DBListener listener);
 
         void cancelTransactions();
+
+        void createRealmInstance();
+
+        void closeRealmInstance();
     }
 }

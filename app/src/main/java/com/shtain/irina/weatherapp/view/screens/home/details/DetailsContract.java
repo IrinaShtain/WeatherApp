@@ -9,7 +9,6 @@ import com.shtain.irina.weatherapp.view.base.ContentView;
 import com.shtain.irina.weatherapp.view.screens.home.cities.DBListener;
 
 import io.reactivex.Observable;
-import io.realm.RealmResults;
 
 /**
  * Created by Irina Shtain on 03.04.2018.
@@ -49,6 +48,10 @@ public interface DetailsContract {
         MainWeatherDB getSaveData(String address);
 
         void cancelTransactions();
+
+        void createRealmInstance();
+
+        void closeRealmInstance();
 
     }
 }

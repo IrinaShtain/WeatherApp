@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.CompositeDisposable;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -20,15 +21,17 @@ public class CityListPresenter implements CityListContract.Presenter {
 
     private CityListContract.View mView;
     private CityListContract.Model mModel;
-    private Realm mRealm;
+    private CompositeDisposable mCompositeDisposable;
 
     @Inject
-    public CityListPresenter(CityListContract.Model model) {
+    public CityListPresenter(CityListContract.Model model, CompositeDisposable compositeDisposable) {
         mModel = model;
+        mCompositeDisposable = compositeDisposable;
     }
 
     @Override
     public void subscribe() {
+        mModel.createRealmInstance();
         RealmResults<CityDB> cities = mModel.cities();
         ArrayList<CityDH> cityDHS = new ArrayList<>();
         for (CityDB city : cities) {
@@ -45,6 +48,7 @@ public class CityListPresenter implements CityListContract.Presenter {
     @Override
     public void unsubscribe() {
         mModel.cancelTransactions();
+        mModel.closeRealmInstance();
     }
 
     @Override

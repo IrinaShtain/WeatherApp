@@ -10,6 +10,7 @@ import com.shtain.irina.weatherapp.view.screens.home.di.MainScope;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 import io.realm.Realm;
 
 /**
@@ -19,14 +20,14 @@ import io.realm.Realm;
 public class DiDetailsModule {
     @Provides
     @MainScope
-    DetailsContract.Presenter provideDetailsPresenter(DetailsContract.Model model) {
-        return new DetailsPresenter(model);
+    DetailsContract.Presenter provideDetailsPresenter(DetailsContract.Model model, CompositeDisposable compositeDisposable) {
+        return new DetailsPresenter(model, compositeDisposable);
     }
 
     @Provides
     @MainScope
-    DetailsContract.Model provideDataRepository(RetrofitHelper helper, SchedulerHelper schedulerHelper, Realm realm) {
-        return new WeatherRepository(provideWeatherService(helper), schedulerHelper, realm);
+    DetailsContract.Model provideDataRepository(RetrofitHelper helper, SchedulerHelper schedulerHelper) {
+        return new WeatherRepository(provideWeatherService(helper), schedulerHelper);
     }
 
     @Provides

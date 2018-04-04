@@ -8,6 +8,7 @@ import com.shtain.irina.weatherapp.view.screens.home.di.MainScope;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 import io.realm.Realm;
 
 /**
@@ -17,14 +18,14 @@ import io.realm.Realm;
 public class DiCitiesModule {
     @Provides
     @MainScope
-    CityListContract.Presenter provideCityPresenter(CityListContract.Model model) {
-        return new CityListPresenter(model);
+    CityListContract.Presenter provideCityPresenter(CityListContract.Model model, CompositeDisposable compositeDisposable) {
+        return new CityListPresenter(model, compositeDisposable);
     }
 
     @Provides
     @MainScope
-    CityListContract.Model provideCityData(Realm realm) {
-        return new CitiesRepository(realm);
+    CityListContract.Model provideCityData() {
+        return new CitiesRepository();
     }
 
 }

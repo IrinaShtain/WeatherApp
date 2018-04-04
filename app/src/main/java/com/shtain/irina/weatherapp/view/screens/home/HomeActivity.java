@@ -20,8 +20,6 @@ import io.realm.Realm;
 public class HomeActivity extends BaseActivity {
     @BindView(R.id.toolbar_MA)
     public Toolbar mToolbar;
-    @Inject
-    Realm mRealm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +41,4 @@ public class HomeActivity extends BaseActivity {
         mObjectGraph.getHomeComponent().inject(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mRealm.close();
-    }
 }

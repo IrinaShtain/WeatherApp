@@ -2,7 +2,6 @@ package com.shtain.irina.weatherapp.root;
 
 import android.content.Context;
 
-import com.shtain.irina.weatherapp.root.db.DiRealmModule;
 import com.shtain.irina.weatherapp.root.network.DiNetworkModule;
 import com.shtain.irina.weatherapp.root.network.INetworkManager;
 import com.shtain.irina.weatherapp.root.network.RetrofitHelper;
@@ -24,7 +23,6 @@ import io.realm.Realm;
         DiAppModule.class,
         DiRxSchedulerModule.class,
         DiNetworkModule.class,
-        DiRealmModule.class,
         DiRxModule.class
 })
 public interface DiRootComponent {
@@ -33,5 +31,4 @@ public interface DiRootComponent {
     CompositeDisposable compositeDisposable();
     RetrofitHelper retrofitHelper();
     INetworkManager networkManager();
-    Realm realm();
 }

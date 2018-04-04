@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.shtain.irina.weatherapp.root.ObjectGraph;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
 
 /**
@@ -19,13 +21,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void initGraph();
 
     public ObjectGraph mObjectGraph;
-    public Realm mRealm;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mObjectGraph = ObjectGraph.getInstance(getApplicationContext());
-        mRealm = Realm.getDefaultInstance();
         initGraph();
     }
 
@@ -49,6 +49,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else
             finish();
     }
-
-
 }
