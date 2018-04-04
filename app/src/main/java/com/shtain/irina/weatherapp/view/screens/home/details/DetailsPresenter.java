@@ -48,7 +48,6 @@ public class DetailsPresenter implements DetailsContract.Presenter {
                         mModel.saveData(response, mCity, new DBListener() {
                             @Override
                             public void onSuccess() {
-
                             }
 
                             @Override

@@ -2,16 +2,15 @@ package com.shtain.irina.weatherapp.view.screens.home.cities;
 
 import com.google.android.gms.location.places.Place;
 import com.shtain.irina.weatherapp.model.City;
+import com.shtain.irina.weatherapp.model.WeatherResponse;
 import com.shtain.irina.weatherapp.model.dbmodels.CityDB;
-import com.shtain.irina.weatherapp.utils.Constants;
 import com.shtain.irina.weatherapp.view.base.BasePresenter;
-import com.shtain.irina.weatherapp.view.base.BaseView;
 import com.shtain.irina.weatherapp.view.base.ContentView;
 import com.shtain.irina.weatherapp.view.screens.home.cities.adapter.CityDH;
 
 import java.util.ArrayList;
 
-import io.realm.Realm;
+import io.reactivex.Observable;
 import io.realm.RealmResults;
 
 /**
@@ -38,6 +37,14 @@ public interface CityListContract {
 
     interface Model {
         RealmResults<CityDB> cities();
+
+        Observable<WeatherResponse> getWeather(String lat, String lon);
+
+        void saveData(WeatherResponse data, City city, DBListener listener);
+
+        long getTime(String addres);
+
+        float getTemp(String addres);
 
         void addCityToDB(City city, DBListener listener);
 

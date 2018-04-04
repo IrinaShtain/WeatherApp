@@ -15,6 +15,10 @@ import butterknife.ButterKnife;
 public class CityVH extends RecyclerView.ViewHolder {
     @BindView(R.id.tvCityAddress)
     protected TextView tvCityAddress;
+    @BindView(R.id.tvCityTemp)
+    protected TextView tvCityTemp;
+    @BindView(R.id.tvCityLast)
+    protected TextView tvCityLast;
 
     public CityVH(View itemView) {
         super(itemView);
@@ -23,5 +27,9 @@ public class CityVH extends RecyclerView.ViewHolder {
 
     public void bindData(CityDH cityDH) {
         tvCityAddress.setText(cityDH.getCityTitle());
+        if (cityDH.hasTimeStamp())
+            tvCityLast.setText(cityDH.getDate());
+        if (cityDH.hasTemp())
+            tvCityTemp.setText(cityDH.getTemperature());
     }
 }

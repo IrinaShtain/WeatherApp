@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -69,6 +70,8 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
     protected CoordinatorLayout content_FH;
     @BindView(R.id.rlPlaceHolder)
     protected RelativeLayout rlPlaceHolder;
+    @BindView(R.id.pbMain_FH)
+    protected ProgressBar pbMain_FH;
     @Inject
     CityListPresenter mPresenter;
 
@@ -227,6 +230,19 @@ public class CityListFragment extends BaseFragment implements CityListContract.V
     @Override
     public void showPlaceHolder() {
         rlPlaceHolder.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showProgress() {
+        pbMain_FH.setVisibility(View.VISIBLE);
+        rvItems_FH.setVisibility(View.GONE);
+        rlPlaceHolder.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        pbMain_FH.setVisibility(View.GONE);
+        rvItems_FH.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.fabAdd_FH)

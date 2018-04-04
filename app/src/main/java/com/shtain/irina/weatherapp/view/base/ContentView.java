@@ -7,4 +7,6 @@ import com.shtain.irina.weatherapp.utils.Constants;
  */
 public interface ContentView  extends BaseView{
     void showMessage(Constants.MessageType messageType);
+    void showProgress();
+    void hideProgress();
 }

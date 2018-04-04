@@ -17,10 +17,6 @@ public interface DetailsContract {
     interface View extends ContentView {
         City getChosenCity();
 
-        void showProgress();
-
-        void hideProgress();
-
         void showOfflineMode();
 
         void setIcon(String icon);

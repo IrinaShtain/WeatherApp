@@ -42,7 +42,6 @@ public class WeatherRepository implements DetailsContract.Model {
 
     @Override
     public void saveData(WeatherResponse data, City city, DBListener listener) {
-        mRealm = Realm.getDefaultInstance();
         transaction = mRealm.executeTransactionAsync(bgRealm -> {
                     CityDB cityDB = bgRealm.where(CityDB.class)
                             .equalTo("address", city.getAddress())
@@ -59,6 +58,7 @@ public class WeatherRepository implements DetailsContract.Model {
                         weatherDB = bgRealm.createObject(WeatherDB.class);
                     weatherDB.setDescription(data.weather[0].getDescription());
                     weatherDB.setIcon(data.weather[0].getIcon());
+                    weatherDB.setCity(cityDB);
 
                     TemperatureDB temperatureDB;
                     temperatureDB = bgRealm.where(TemperatureDB.class).equalTo("city.address", city.getAddress()).findFirst();
@@ -66,6 +66,7 @@ public class WeatherRepository implements DetailsContract.Model {
                         temperatureDB = bgRealm.createObject(TemperatureDB.class);
                     temperatureDB.setHumidity(data.temperature.getHumidity());
                     temperatureDB.setTemp(data.temperature.getTemp());
+                    temperatureDB.setCity(cityDB);
 
                     realmObject.setCity(cityDB);
                     realmObject.setTemperature(temperatureDB);
